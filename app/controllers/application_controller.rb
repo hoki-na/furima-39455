@@ -1,9 +1,5 @@
 class ApplicationController < ActionController::Base
   
-  def index
-  end
-
-  
   before_action :basic_auth
 
 
