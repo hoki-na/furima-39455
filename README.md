@@ -31,8 +31,8 @@ has_many :purchases
 |user               |references |null: false,foreign_key: true  |
 
 ### Association
-has_one :purchases
-belongs_to :users
+has_one :purchase
+belongs_to :user
 
 
 ## purchasesテーブル
@@ -44,8 +44,8 @@ belongs_to :users
 
 ### Association
 has_one :address
-belongs_to :items
-belongs_to :users
+belongs_to :item
+belongs_to :user
 
 
 ## addressテーブル
@@ -56,7 +56,7 @@ belongs_to :users
 |prefecture_id    |integer    |null: false                    |
 |municipality     |string     |null: false                    |
 |house_number     |string     |null: false                    |
-|house_name       |string     |null: false                    |
+|house_name       |string     |                               |
 |phone_number     |string     |null: false                    |
 |purchase         |references |null: false, foreign_key: true |
 
