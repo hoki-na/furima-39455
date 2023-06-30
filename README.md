@@ -50,15 +50,15 @@ belongs_to :users
 
 ## addressテーブル
 
-|Column           |Type       |Options                        |
-|-----------------|-----------|-------------------------------|
-|post_code        |string     |null: false                    |
-|prefecture_id    |integer    |null: false                    |
-|municipality     |string     |null: false                    |
-|house_number     |string     |null: false                    |
-|house_name       |string     |null: false                    |
-|phone_number     |string     |null: false                    |
-|purchase         |references |null: false, foreign_key: true |
+|Column           |Type       |Options                   |
+|-----------------|-----------|--------------------------|
+|post_code        |string     |null: false               |
+|prefecture_id    |integer    |null: false               |
+|municipality     |string     |null: false               |
+|house_number     |string     |null: false               |
+|house_name       |string     |null: false               |
+|phone_number     |string     |null: false               |
+|purchase         |references |null: false, unique: true |
 
 ### Association
 belongs_to :purchase
