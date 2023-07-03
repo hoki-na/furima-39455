@@ -15,7 +15,6 @@
       <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
     </ul>
     <ul class='lists-right'>
-      <%# deviseを導入できたら、ログインの有無で表示が変わるように分岐しましょう%>
       <% if user_signed_in? %>
         <div class="in">
           <%= link_to current_user.nickname, "#", class: "user-nickname" %>
@@ -27,7 +26,6 @@
           <%= link_to "新規登録", new_user_registration_path, class: "sign-up" %>
         </div>
       <% end %>
-      <%# //deviseを導入できたら、ログインの有無で表示が変わるように分岐しましょう%>
     </ul>
   </div>
 </header>
