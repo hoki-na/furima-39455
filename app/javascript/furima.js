@@ -10,3 +10,8 @@ function furima() {
   });
 };
 
+// 通常のページロード時に実行
+document.addEventListener('DOMContentLoaded', furima);
+
+// Turboフレームワークのページ遷移時に実行
+document.addEventListener('turbo:load', furima);
