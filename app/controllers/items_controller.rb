@@ -16,35 +16,31 @@ class ItemsController < ApplicationController
     end
   end
 
-  def new
-    @item = Item.new
-  end
+  # def show
+  # end
 
-  def show
-  end
+  # def edit
+  #   return unless current_user.id != @item.user_id
 
-  def edit
-    return unless current_user.id != @item.user_id
+  #   redirect_to root_path
+  # end
 
-    redirect_to root_path
-  end
+  # def update
+  #   if @item.update(item_params)
+  #     redirect_to @item
+  #   else
+  #     render :edit, status: :unprocessable_entity
+  #   end
+  # end
 
-  def update
-    if @item.update(item_params)
-      redirect_to @item
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    if current_user != @item.user
-      redirect_to root_path
-    else
-      @item.destroy
-      redirect_to root_path
-    end
-  end
+  # def destroy
+  #   if current_user != @item.user
+  #     redirect_to root_path
+  #   else
+  #     @item.destroy
+  #     redirect_to root_path
+  #   end
+  # end
 
   private
 
@@ -52,9 +48,9 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:item_name, :price, :description, :category_id, :condition_id, :delivery_charge_id, :prefecture_id, :ship_date_id, :image).merge(user_id: current_user.id)
   end
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
+  # def set_item
+  #   @item = Item.find(params[:id])
+  # end
 
 
 
