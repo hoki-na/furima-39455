@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new]
+  # before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def new
     @item = Item.new
@@ -12,12 +12,13 @@ class ItemsController < ApplicationController
 
     if @item.save
       redirect_to root_path, notice: 'Item was successfully created.' 
-    else render :new, status: :unprocessable_entity
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def index
-    @items = Item.all
+    @items = Item.all.order("created_at DESC")
   end
 
   # def show
