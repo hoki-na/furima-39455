@@ -22,7 +22,7 @@ class Item < ApplicationRecord
   end
 
   def sold_out?
-    purchases.exists?  # 購入履歴が存在するかどうかをチェック
+    purchases.exists?  
   end
   
 end
