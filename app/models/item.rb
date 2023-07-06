@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :ship_date
   has_one_attached :image
+  has_many :purchases
 
 
   validates :image, :item_name, :description, presence: true
@@ -19,5 +20,10 @@ class Item < ApplicationRecord
   def was_attached?
     image.attached?
   end
+
+  def sold_out?
+    purchases.exists?  # 購入履歴が存在するかどうかをチェック
+  end
+  
 end
 
