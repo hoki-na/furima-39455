@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def new
-    @item = Items.new
+    @item = Item.new
   end
 
   def create
