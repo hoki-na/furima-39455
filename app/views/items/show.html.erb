@@ -26,20 +26,25 @@
       </span>
     </div>
 
-    <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
-
-    <% if current_user == @item.user %>
-      <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
-      <p class="or-text">or</p>
-      <%= link_to "削除", "#", method: :delete, class: "item-destroy" %>
-    <% end %>
+    <%# <% if current_user == @item.user %>
+      <%# <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
+      <%# <p class="or-text">or</p> %>
+      <%# <%= link_to "削除", "#", method: :delete, class: "item-destroy" %>
+    <%# <% end %>
     <%# 商品が売れていない場合はこちらを表示しましょう %>
-    <% if user_signed_in? && current_user != @item.user && !@item.sold_out? %>
-      <%= link_to "購入画面に進む", "#", class: "item-red-btn" %>
-    <% end %>
+    <%# <% if user_signed_in? && current_user != @item.user && !@item.sold_out? %>
+      <%# <%= link_to "購入画面に進む", "#", class: "item-red-btn" %>
+    <%# <% end %>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
 
-    <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
+    <% if user_signed_in? %>
+      <% if current_user == @item.user %>
+        <%= link_to "編集ボタン", "#", class: "item-red-btn" %>
+        <%= link_to "削除ボタン", "#", method: :delete, class: "item-destroy" %>
+      <% else %>
+        <%= link_to "購入ボタン", "#", class: "item-red-btn" %>
+      <% end %>
+    <% end %>
 
     <div class="item-explain-box">
       <span><%= @item.description %></span>
@@ -108,7 +113,7 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="#" class="another-item"><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 

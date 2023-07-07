@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
-
-  # before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show]
 
 
   def new
@@ -22,10 +21,6 @@ class ItemsController < ApplicationController
     @items = Item.all.order('created_at DESC')
   end
 
-
-def show
-  @item = Item.find(params[:id])
-end
   # def edit
   #   return unless current_user.id != @item.user_id
 
