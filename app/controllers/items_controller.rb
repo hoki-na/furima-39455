@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
-  # before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show]
+
 
   def new
     @item = Item.new
@@ -19,9 +20,6 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all.order('created_at DESC')
   end
-
-  # def show
-  # end
 
   # def edit
   #   return unless current_user.id != @item.user_id
@@ -53,7 +51,9 @@ class ItemsController < ApplicationController
                                  :prefecture_id, :ship_date_id, :image).merge(user_id: current_user.id)
   end
 
-  # def set_item
-  #   @item = Item.find(params[:id])
-  # end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
 end
