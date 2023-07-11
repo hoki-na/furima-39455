@@ -38,7 +38,6 @@ class ItemsController < ApplicationController
     end
   end
 
-
   # def destroy
   #   if current_user != @item.user
   #     redirect_to root_path
@@ -64,7 +63,4 @@ class ItemsController < ApplicationController
       redirect_to new_user_session_path
     end
   end
-
-
-
 end
