@@ -1,15 +1,18 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :new]
+  before_action :authenticate_user!, only: [:new, :edit,]
+  before_action :check_login, only: [:show]
   before_action :set_item, only: [:show, :edit, :update]
-
 
   def new
     @item = Item.new
   end
 
-  def create
-    @item = Item.new(item_params)
+  def show
+    @item = Item.find(params[:id])
+  end
 
+  def create
+    @item = current_user.items.build(item_params)
     if @item.save
       redirect_to root_path, notice: 'Item was successfully created.'
     else
@@ -22,20 +25,20 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
-    return unless current_user.id != @item.user_id
-
-    redirect_to root_path
+    if !user_signed_in? || (current_user != @item.user || @item.sold_out?)
+      redirect_to new_user_session_path
+    end
   end
 
   def update
     if @item.update(item_params)
-      redirect_to @item, notice: 'Item was successfully updated.'
+      redirect_to @item
     else
       render :edit, status: :unprocessable_entity
     end
   end
-  
+
+
   # def destroy
   #   if current_user != @item.user
   #     redirect_to root_path
@@ -44,6 +47,10 @@ class ItemsController < ApplicationController
   #     redirect_to root_path
   #   end
   # end
+  
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   private
 
@@ -52,9 +59,12 @@ class ItemsController < ApplicationController
                                  :prefecture_id, :ship_date_id, :image).merge(user_id: current_user.id)
   end
 
-
-  def set_item
-    @item = Item.find(params[:id])
+  def check_login
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
+
+
 
 end
