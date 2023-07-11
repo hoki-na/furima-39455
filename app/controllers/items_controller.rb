@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit,]
-  before_action :check_login, only: [:show]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:show, :new, :edit, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def new
     @item = Item.new
@@ -38,14 +37,14 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   if current_user != @item.user
-  #     redirect_to root_path
-  #   else
-  #     @item.destroy
-  #     redirect_to root_path
-  #   end
-  # end
+  def destroy
+    if current_user != @item.user
+      redirect_to root_path
+    else
+      @item.destroy
+      redirect_to root_path
+    end
+  end
   
   def set_item
     @item = Item.find(params[:id])
@@ -58,9 +57,4 @@ class ItemsController < ApplicationController
                                  :prefecture_id, :ship_date_id, :image).merge(user_id: current_user.id)
   end
 
-  def check_login
-    unless user_signed_in?
-      redirect_to new_user_session_path
-    end
-  end
 end
