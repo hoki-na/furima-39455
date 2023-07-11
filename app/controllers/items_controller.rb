@@ -25,11 +25,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if !user_signed_in? || (current_user != @item.user || @item.sold_out?)
-      redirect_to new_user_session_path
+    if !user_signed_in? || (current_user != @item.user && !@item.sold_out?)
+      redirect_to root_path
     end
   end
-
+  
   def update
     if @item.update(item_params)
       redirect_to @item
