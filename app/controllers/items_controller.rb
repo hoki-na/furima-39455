@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
     return unless current_user.id != @item.user_id
 
     redirect_to root_path
@@ -29,12 +30,12 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to @item
+      redirect_to @item, notice: 'Item was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
   end
-
+  
   # def destroy
   #   if current_user != @item.user
   #     redirect_to root_path
