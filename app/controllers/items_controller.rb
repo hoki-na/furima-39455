@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :show, :new, :edit, :destroy]
-  before_action :set_item, only: [:show]
+  before_action :authenticate_user!, only: [:show, :new, :edit, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:show]
 
   def new

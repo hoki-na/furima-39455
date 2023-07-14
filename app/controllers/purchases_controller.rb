@@ -14,7 +14,6 @@ class PurchasesController < ApplicationController
     if user_check
       redirect_to root_path and return
     end
-    
   end
 
   def set_item
