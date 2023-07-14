@@ -6,7 +6,7 @@
     <h2 class="name">
       <%= @item.item_name %>
     </h2>
-    
+
     <div class="item-img-content">
       <%= image_tag @item.image, class:"item-box-img" %>
       <% if @item.sold_out? %>%
@@ -32,7 +32,7 @@
         <p class="or-text">or</p>
         <%= link_to "削除", item_path(@item.id), data: { turbo_method: :delete }, class: "item-destroy" %>
       <% else %>
-        <%= link_to "購入画面に進む", "#", class: "item-red-btn" %>
+        <%= link_to "購入画面に進む", item_purchases_path(@item), class: "item-red-btn" %>
       <% end %>
     <% end %>
 
