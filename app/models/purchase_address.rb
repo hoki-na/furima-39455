@@ -1,5 +1,6 @@
 class PurchaseAddress
   include ActiveModel::Model
+
   attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipality, :house_number, :house_name, :phone_number, :token
   with_options presence: true do
     validates :user_id
@@ -17,5 +18,4 @@ class PurchaseAddress
     purchase = Purchase.create(user_id:, item_id:)
     Address.create(post_code:, prefecture_id:, municipality:, house_number:, house_name:, phone_number:, purchase_id: purchase.id)
   end
-
 end
