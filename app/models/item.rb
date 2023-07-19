@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :ship_date
   has_one_attached :image
-  has_many :purchases
+  has_one :purchase
 
 
   validates :image, :item_name, :description, presence: true
@@ -21,6 +21,6 @@ class Item < ApplicationRecord
   end
 
   def sold_out?
-    purchases.exists?
+    purchase.present?
   end
 end
