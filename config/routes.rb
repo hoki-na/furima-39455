@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
   root 'items#index'
-  resources :items
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :items do
+    resources :purchases
+  end
 
   devise_scope :user do
     get '/users/sign_out', to: 'devise/sessions#destroy'
   end
+
+  get '/items/:item_id/purchase', to: redirect('/')
+  
 end
