@@ -16,10 +16,6 @@ class PurchasesController < ApplicationController
     end
   end
 
-  def set_item
-    @item = Item.find(params[:item_id])
-  end
-
   def create
     @purchase_address = PurchaseAddress.new(purchase_address_params)
     if @purchase_address.valid?
@@ -33,11 +29,16 @@ class PurchasesController < ApplicationController
     end
   end
 
+
+  private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
   def purchase_address_params
     params.require(:purchase_address).permit(:post_code, :prefecture_id, :municipality, :house_number, :house_name, :phone_number, :token).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
-
-  private
 
   def user_check
     current_user == @item.user
