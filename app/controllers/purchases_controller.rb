@@ -8,7 +8,7 @@ class PurchasesController < ApplicationController
     @purchase_address = PurchaseAddress.new
     
     if @item.sold_out?
-      redirect_to root_path
+      redirect_to root_path and return
     end
     
     if user_check

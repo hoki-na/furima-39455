@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users/sign_out', to: 'devise/sessions#destroy'
   end
+
+  get '/items/:item_id/purchase', to: redirect('/')
   
 end
